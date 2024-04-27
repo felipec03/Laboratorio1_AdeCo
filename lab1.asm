@@ -29,10 +29,12 @@
 	move $t1, $v0
 	
 	addi $t2, $zero, 0 # Contador del while, i = 0
-	addi $t3, $zero, 10000000 # Número que permite sacar ir particionando el número en unidades
+	addi $t3, $zero, 10000000 # Número que permite ir particionando el número en unidades
 	
 	addi $t4, $zero, 160
 	addi $t5, $zero, 192
+	addi $t6, $zero, 224
+	
 	while1:
 		bgt $t2, 7, exit1 # Condicional
 		# Primer arreglo
@@ -49,8 +51,14 @@
 			addi $t5, $t5, 4
 		mfhi $t1
 		
+		xor $s0, $a1, $a2
+		sw $s0, arreglo3($t6)
+			addi $t6, $t6, 4
+			
 		addi $t2, $t2, 1 # i++
 		divu $t3, $t3, 10 # constante = constante / 10
+		
+
 
 		j while1
 	exit1:
